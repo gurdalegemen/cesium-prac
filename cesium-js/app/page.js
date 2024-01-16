@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 export default function Home(){
   useEffect(()=>{
     // The URL on your server where CesiumJS's static files are hosted.
-    window.CESIUM_BASE_URL = '/static/Cesium/';
+    window.CESIUM_BASE_URL = '/Cesium/';
     
 
     // Replace `your_access_token` with your Cesium ion access token.
@@ -17,19 +17,19 @@ export default function Home(){
 
     
     // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-    const viewer = new Viewer('cesiumContainer', {
-      terrain: Terrain.fromWorldTerrain(),
-    });
-
-
+    const viewer = new Viewer('cesiumContainer');
+    // {
+    //   terrain: Terrain.fromWorldTerrain(),
+    // });
+    
     // Fly the camera to San Francisco at the given longitude, latitude, and height.
-    viewer.camera.flyTo({
-      destination: Cartesian3.fromDegrees(-122.4175, 37.655, 400),
-      orientation: {
-        heading: CesiumMath.toRadians(0.0),
-        pitch: CesiumMath.toRadians(-15.0),
-      }
-    });
+    // viewer.camera.flyTo({
+    //   destination: Cartesian3.fromDegrees(-122.4175, 37.655, 400),
+    //   orientation: {
+    //     heading: CesiumMath.toRadians(0.0),
+    //     pitch: CesiumMath.toRadians(-15.0),
+    //   }
+    // });
 
     // Add Cesium OSM Buildings, a global 3D buildings layer.
     const buildingTilesetMethod = async () =>{
