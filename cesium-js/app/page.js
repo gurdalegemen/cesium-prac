@@ -25,19 +25,7 @@ export default function Home(){
         pixelSize: 20,
         color: Color.RED,
       },
-    })
-    // {
-    //   terrain: Terrain.fromWorldTerrain(),
-    // });
-    
-    // Fly the camera to San Francisco at the given longitude, latitude, and height.
-    // viewer.camera.flyTo({
-    //   destination: Cartesian3.fromDegrees(-122.4175, 37.655, 400),
-    //   orientation: {
-    //     heading: CesiumMath.toRadians(0.0),
-    //     pitch: CesiumMath.toRadians(-15.0),
-    //   }
-    // });
+    }) // define a pin on map
 
     // Add Cesium OSM Buildings, a global 3D buildings layer.
     const buildingTilesetMethod = async () =>{
@@ -47,7 +35,9 @@ export default function Home(){
 
     buildingTilesetMethod();
     
-  })
+  })//end of useEffect
+
+
 
 
   return(
