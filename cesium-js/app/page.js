@@ -1,7 +1,7 @@
 // 'use server'
 'use client'
 
-import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer } from 'cesium';
+import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, Scene, Color } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useEffect } from 'react';
   
@@ -18,6 +18,14 @@ export default function Home(){
     
     // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
     const viewer = new Viewer('cesiumContainer');
+
+    viewer.entities.add({
+      position: Cartesian3.fromDegrees(33.70, 39.250),
+      point: {
+        pixelSize: 20,
+        color: Color.RED,
+      },
+    })
     // {
     //   terrain: Terrain.fromWorldTerrain(),
     // });
