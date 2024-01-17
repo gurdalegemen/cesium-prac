@@ -4,6 +4,7 @@
 import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, Scene, Color } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useEffect } from 'react';
+import Link from 'next/link';
   
 
 export default function Home(){
@@ -41,6 +42,8 @@ export default function Home(){
 
 
   return(
-    <main id="cesiumContainer"></main>
+    <Link href="/">
+      <main id="cesiumContainer"></main>
+    </Link>
   )
 }
