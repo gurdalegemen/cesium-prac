@@ -1,8 +1,10 @@
 // 'use server'
 'use client'
 
-import {Cartographic, Cartesian2, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, Scene, Color, ScreenSpaceEventType } from 'cesium';
+import {Cartographic, Cartesian2, Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Viewer, Color } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
+import "cesium/Build/Cesium/Widgets/InfoBox/InfoBoxDescription.css"; // Import additional CSS if needed
+import "cesium/Build/Cesium/Widgets/InfoBox/InfoBox.css";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
   
@@ -10,7 +12,6 @@ export default function ClickPage(){
 
   // Add a handler for pin add on map with right-click event.
   function putPin(viewer, e){
-    console.log(e);
     
     var mousePosition = new Cartesian2(e.clientX, e.clientY);
     var ray = viewer.camera.getPickRay(mousePosition);
@@ -53,7 +54,11 @@ export default function ClickPage(){
       e.preventDefault();
       putPin(viewer, e);
     });
+    
 
+    return () => {
+      viewer.destroy();
+    };
     
   } // InitilazeMap Async Function
 
@@ -64,10 +69,12 @@ export default function ClickPage(){
     
   },[])//end of useEffect
 
+
   
   return(
     <Link href="/click">
-      <main id="cesiumContainer">
+      <main>
+        <div id="cesiumContainer"></div>
       </main>
     </Link>
   )
