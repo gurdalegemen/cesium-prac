@@ -8,7 +8,7 @@ import "cesium/Build/Cesium/Widgets/InfoBox/InfoBox.css";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-export default function ClickPage({cesium}){
+export default function ClickPage(){
 
     var isValid = true;
     var pointCounter = 0;
