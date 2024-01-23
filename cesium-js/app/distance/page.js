@@ -8,27 +8,31 @@ import "cesium/Build/Cesium/Widgets/InfoBox/InfoBox.css";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-export default function ClickPage(){
+export default function ClickPage({cesium}){
 
-    const [selectedPoint, setSelectedPoint] = useState([]);
+    var isValid = true;
+    var pointCounter = 0;
+    // const [selectedPoint, setSelectedPoint] = useState([]);
+    var selectedPoint = [];
 
     // Cartesian coordinate to Cartographic coordinate function.
     function cartesianToCartographic(cartesian){
         var cartographic = Cartographic.fromCartesian(cartesian);
         var longitude = CesiumMath.toDegrees(cartographic.longitude);
         var latitude = CesiumMath.toDegrees(cartographic.latitude);
+        var height = CesiumMath.toDegrees(cartographic.height)
 
-        return {longitude,latitude}
+        return {longitude,latitude,height}
     }
 
     function euclideanDistance(selectedPoint) {
-
         const [point1,point2] = selectedPoint
-        const dx = point2.latitude- point1.latitude;
-        const dy = point2.longitude - point1.longitude;
-    
-        // Calculate straight-line distance
-        const distance = Math.sqrt(dx * dx + dy * dy);
+        const dx = point2.x- point1.x;
+        const dy = point2.y - point1.y;
+        const dz = point2.z - point1.z;
+
+        //Calculate straight-line distance
+        const distance = Math.sqrt(Math.pow(dx,2) + Math.pow(dy,2) + Math.pow(dz,2) );//Cartesian3.distanceSquared(point1,point2);
     
         return distance;
     }
@@ -53,15 +57,28 @@ export default function ClickPage(){
     }
 
     async function InitializeMap(){
-    
+        
+        isValid = false;
         // The URL on your server where CesiumJS's static files are hosted (Assets and Wigdets).
         window.CESIUM_BASE_URL = '/Cesium/';
         
         //Cesium ion access token.
         Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMGJjN2U5Yi01NzllLTQwMTYtYTgwNC1mZjY3Y2Q1NGFjZTciLCJpZCI6MTg5OTg0LCJpYXQiOjE3MDUzOTI2NTR9.l9nLnpdewGt1VCY8-cQqUK1ehh_ZLOwlMQNnAcDAm9E";
         
+        
         // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-        const viewer = new Viewer("cesiumContainer");
+        const viewer = new Viewer("cesiumGlobe",{
+            // requestRenderMode: true,
+
+            homeButton: false,
+            fullscreenButton: false,
+            
+            timeline: false,
+            geocoder: false,
+            animation: false,
+        });
+
+        
         
         // // Add Cesium OSM Buildings, a global 3D buildings layer.
         // const buildingTilesetMethod = async () =>{
@@ -79,41 +96,40 @@ export default function ClickPage(){
         //set state selectedItem on map
         const handlePointSelection = (selectedEntity) => {
             if (cesiumDefined(selectedEntity)) {
-                var pos = cartesianToCartographic(selectedEntity.position._value);
+                var pos = selectedEntity.position._value;//cartesianToCartographic(selectedEntity.position._value);
                 //pos['height'] = 0; //if need height when calculte the distance between points
-                setSelectedPoint(selectedPoint => [...selectedPoint, pos]);
-                // var distance = euclideanDistance(selectedPoint);
-                // if(distance != -1){
-                //     alert("Distance: "+ distance)
-                // }
+                selectedPoint = [...selectedPoint, pos];
+                console.log(selectedPoint)
+                pointCounter++;
+                if(pointCounter === 2){
+                    var distance = euclideanDistance(selectedPoint);
+                    if(distance != -1){
+                        alert("Distance: "+ distance)
+                    }
+                }
             } else {
                 console.log('Deselected.');
-                setSelectedPoint([]);
+                selectedPoint = [];
+                pointCounter = 0;
             }
         };
         viewer.selectedEntityChanged.addEventListener(handlePointSelection);
         
 
-        return () => {
-            if (viewer && !viewer.isDestroyed()) {
-              viewer.destroy();
-            }
-          };
-
     } // InitilazeMap Async Function
 
-
-    
   
     useEffect(()=>{
-        InitializeMap();
+        if(isValid){
+            InitializeMap();
+        }
     },[])//end of useEffect
 
 
   
   return(
     <Link href="/distance">
-      <main id="cesiumContainer"></main>
+      <main id="cesiumGlobe"></main>
     </Link>
   )
 }
