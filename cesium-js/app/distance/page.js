@@ -97,9 +97,7 @@ export default function ClickPage({cesium}){
         const handlePointSelection = (selectedEntity) => {
             if (cesiumDefined(selectedEntity)) {
                 var pos = selectedEntity.position._value;//cartesianToCartographic(selectedEntity.position._value);
-                //pos['height'] = 0; //if need height when calculte the distance between points
                 selectedPoint = [...selectedPoint, pos];
-                console.log(selectedPoint)
                 pointCounter++;
                 if(pointCounter === 2){
                     var distance = euclideanDistance(selectedPoint);
