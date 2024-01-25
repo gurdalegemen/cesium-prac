@@ -28,3 +28,42 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+#customButton{
+  border-radius: 0.75rem !important;
+  border: none !important;
+
+}
+#customButton:hover{
+  border-radius: 0.75rem !important;
+}
+
+#locationCustomButton{
+  border-radius: 0.75rem !important;
+  border: none !important;
+  background-color: white !important;
+  margin: 0;
+}
+
+#locationCustomButton:hover{
+  border-radius: 0.75rem !important;
+}
+
+#compassIcon{
+  margin: 0;
+}
+
+#searchButton{
+  height: 32px !important;
+  width: 24px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background-color: #4d4d4d !important;
+}
+
+#searchButton.icon{
+  color: lightgray !important;
+}
+
+#searchInput{
+  border-radius: 0.75rem !important;
+}
