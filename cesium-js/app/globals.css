@@ -63,13 +63,12 @@ body {
   background-color: #4d4d4d !important;
 }
 
-#searchButton.icon{
-  color: lightgray !important;
+#searchButton.icon:hover{
+  color: white !important;
 }
 
-.toolbarIcons{
-  height: 24px !important;
-  width: 24px !important;
+#searchButton.icon{
+  color: lightgray !important;
 }
 
 .ui.basic.vertical.buttons{
@@ -127,6 +126,36 @@ body {
   padding: 0;
   height: 40px !important;
   width: 40px !important;
+}
+
+#toolbarButtonGroup{
+  border-radius: 12px !important;
+  background-color: white;
+}
+
+#toolbarButtons{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem !important;
+  border: none !important;
+  height: 40px !important;
+  width: 40px !important;
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
+}
+
+#toolbarButtons:hover{
+  border-radius: 0.75rem !important;
+  opacity: 1;
+}
+
+.i.icon{
+  margin: 0 !important;
+}
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
+  margin: 0 !important;
 }
 
 #customButtonGroup{
