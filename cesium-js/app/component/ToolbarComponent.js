@@ -40,9 +40,6 @@ export default function ToolbarComponent(){
                                 <Icon name="bars" size="large" color="black"/>     
                             </Button>
                         </ButtonGroup>
-                    {/* <div style={{padding:'8px', height:'40px', width:'40px'}}>
-                        <Icon className="toolbarIcons" fitted name="bars" size="large" color="grey"/>
-                    </div> */}
                 </div>
         </>
 

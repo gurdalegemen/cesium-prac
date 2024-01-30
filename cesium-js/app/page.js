@@ -3,7 +3,7 @@
 import 'semantic-ui-css/semantic.min.css';
 import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, Scene, Color } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import SearchBar from './component/SearchBarComponent';
 import Toolbar from './component/ToolbarComponent';
@@ -14,6 +14,7 @@ import MapControl from './component/MapControlComponent';
 export default function Home(){
   
   var isValid = true;
+  var [viewer, setViewer] = useState();
   
   async function InitializeMap(){
         
@@ -26,7 +27,7 @@ export default function Home(){
     
     
     // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
-    const viewer = new Viewer("cesiumGlobe",{
+    viewer = new Viewer("cesiumGlobe",{
 
         homeButton: false,
         fullscreenButton: false,
@@ -39,6 +40,8 @@ export default function Home(){
         geocoder: false,
         animation: false,
     });
+
+    setViewer(viewer);
     
   } // InitilazeMap Async Function
 
@@ -52,24 +55,23 @@ export default function Home(){
 
 
   return(
-    <Link href="/">
-      <div id="cesiumGlobe" style={{height:'100vh', width:'100%', position:'relative'}}>
-        <div style={{position:'absolute', zIndex:99, paddingTop:'8px', paddingLeft:'16px', width:'100%'}}>
-          <div>
-            <SearchBar/>
-          </div>
-          <div style={{position:'absolute',zIndex:99, display:'flex', top:0, bottom:0, right:0, alignItems:'flex-start', justifyContent:'flex-end', paddingRight:'12px !important', paddingTop:'12px !important', paddingLeft:'48px !important'}}>
-            <Toolbar/>
-          </div>
+    <>
+      <div style={{position:'absolute', zIndex:99, paddingTop:'8px', paddingLeft:'16px', width:'100%'}}>
+        <div>
+          <SearchBar/>
         </div>
-        <div style={{position:'absolute', zIndex:99, display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center', right:'8px', top:'64px', bottom:'64px',}}>
-              <div style={{flexGrow:1, flexBasis:0}}/>
-              <MapControl/>
-              <div style={{flexGrow:1, flexBasis:0}}/>
+        <div style={{position:'absolute',zIndex:99, display:'flex', top:0, bottom:0, right:0, alignItems:'flex-start', justifyContent:'flex-end', paddingRight:'12px !important', paddingTop:'12px !important', paddingLeft:'48px !important'}}>
+          <Toolbar/>
         </div>
-        {/* <SideBarComponent/> */}
-        {/* <StepGroupComponent/> */}
       </div>
-    </Link>
+      <div style={{position:'absolute', zIndex:99, display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center', right:'8px', top:'64px', bottom:'64px',}}>
+        <div style={{flexGrow:1, flexBasis:0}}/>
+          <MapControl mapViewer={viewer}/>
+        <div style={{flexGrow:1, flexBasis:0}}/>
+      </div>
+      <Link href="/">
+        <div id="cesiumGlobe" style={{height:'100vh', width:'100%', position:'relative', zIndex:1}}></div>
+      </Link>
+    </>
   )
 }
