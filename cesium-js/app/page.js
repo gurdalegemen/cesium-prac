@@ -1,7 +1,7 @@
 // 'use server'
 'use client'
 import 'semantic-ui-css/semantic.min.css';
-import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, Scene, Color } from 'cesium';
+import { Cartesian3, createOsmBuildingsAsync, Ion, Math as CesiumMath, Terrain, Viewer, Scene, Color, UrlTemplateImageryProvider } from 'cesium';
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -41,7 +41,21 @@ export default function Home(){
         animation: false,
     });
 
+  
+
     setViewer(viewer);
+
+    // const wms = new UrlTemplateImageryProvider({
+    //       url : 'https://basemap.nationalmap.gov/arcgis/services/USGSShadedReliefOnly/MapServer/WMSServer',
+    //       layers : '0',
+    //       parameters : {
+    //           transparent : true,
+    //           format : 'image/png'
+    //       }
+    //   });
+
+
+    // viewer.ImageryLayerCollection.add(wms);
     
   } // InitilazeMap Async Function
 
