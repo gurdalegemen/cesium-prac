@@ -3,11 +3,11 @@ import { ButtonGroup,Button, Icon } from "semantic-ui-react";
 export default function MapControlComponent(mapViewer){
 
     const zoomPlus = () => {
-        mapViewer.mapViewer.camera.zoomIn(2500000);
+        mapViewer.mapViewer.camera.zoomIn(500000);
     }
     const zoomMinus = () => {
         
-        mapViewer.mapViewer.camera.zoomOut(2500000);
+        mapViewer.mapViewer.camera.zoomOut(500000);
     }
 
     return(

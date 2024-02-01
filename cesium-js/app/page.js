@@ -14,11 +14,55 @@ import MapControl from './component/MapControlComponent';
 export default function Home(){
   
   var isValid = true;
+  const isCity = true;
   var [viewer, setViewer] = useState();
+
+  function findLocation(lon, lat, viewer, isCity){
+    if(isCity){
+      const targetPosition = Cartesian3.fromDegrees(lon, lat , 1000);
+      viewer.camera.flyTo({
+        destination:targetPosition,
+      })
+    }
+    else{
+      const targetPosition = Cartesian3.fromDegrees(lon, lat , 5000);
+      viewer.camera.flyTo({
+        destination:targetPosition,
+      })
+    }
+   
+  }
+
+  function userLocationFlyTo(viewer){
+
+    if('geolocation' in navigator){
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userPos = position.coords;
+
+          findLocation(userPos.longitude, userPos.latitude, viewer, isCity)
+         
+        },
+        (error) => {
+          if(error.code === 1){
+            try {
+              fetch("https://ipapi.co/json/")
+              .then(response => response.json())
+              .then(json => findLocation(json.longitude, json.latitude, viewer, !isCity))
+              
+            } catch (error) {
+              throw new Error(error.message)
+            }
+          }
+        }
+      )
+    }
+  }
   
   async function InitializeMap(){
         
     isValid = false;
+
     // The URL on your server where CesiumJS's static files are hosted (Assets and Wigdets).
     window.CESIUM_BASE_URL = '/Cesium/';
     
@@ -41,21 +85,12 @@ export default function Home(){
         animation: false,
     });
 
-  
+    userLocationFlyTo(viewer);
+
+    
 
     setViewer(viewer);
 
-    // const wms = new UrlTemplateImageryProvider({
-    //       url : 'https://basemap.nationalmap.gov/arcgis/services/USGSShadedReliefOnly/MapServer/WMSServer',
-    //       layers : '0',
-    //       parameters : {
-    //           transparent : true,
-    //           format : 'image/png'
-    //       }
-    //   });
-
-
-    // viewer.ImageryLayerCollection.add(wms);
     
   } // InitilazeMap Async Function
 

@@ -16,20 +16,21 @@ export default function SearchBarComponent(){
 
                 fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
                 .then(response => response.json())
-                .then(json =>setLocations(json))
+                .then(json => setLocations(json))
             
             } catch (error) {
                 console.error(error.message, error)
             }
         };
 
-
+       
+        // console.log(locations)
     return(
         <>
         <div style={{display:'flex', alignItems:'center', padding:'2px'}}>
             <div style={{display:'flex', width:'358px'}}>
                 <Icon id="searchMarker" name="map marker alternate" color="red" size="large"/>
-                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} showNoResults={false} placeholder="Mekan ve adres arama" size="large"/>
+                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={locations} showNoResults={false} placeholder="Mekan ve adres arama" size="large"/>
                 <ButtonGroup id="searchCustomBtnGroup" basic>
                     <Button id="searchInputButton" onClick={searchLocations} >
                         <Icon id="iconMarginPattern" name="search" size="large"/>
