@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { json } from "react-router-dom";
 import {Search, Button, ButtonGroup, Icon} from "semantic-ui-react"
 
 export default function SearchBarComponent(){
 
-        const [locations, setLocations] = useState([]);
+        const [locations, setLocations] = useState([{}]);
 
         const handleInputChange = (event) =>{
             searchLocations(event.target.value);
@@ -24,13 +23,16 @@ export default function SearchBarComponent(){
         };
 
        
-        // console.log(locations)
+        const columns = locations.map(({ name: title, display_name: description }) => ({
+            title,
+            description,
+          }));
     return(
         <>
         <div style={{display:'flex', alignItems:'center', padding:'2px'}}>
             <div style={{display:'flex', width:'358px'}}>
                 <Icon id="searchMarker" name="map marker alternate" color="red" size="large"/>
-                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={locations} showNoResults={false} placeholder="Mekan ve adres arama" size="large"/>
+                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={columns} showNoResults={false} placeholder="Mekan ve adres arama" size="large"/>
                 <ButtonGroup id="searchCustomBtnGroup" basic>
                     <Button id="searchInputButton" onClick={searchLocations} >
                         <Icon id="iconMarginPattern" name="search" size="large"/>

@@ -25,7 +25,7 @@ export default function Home(){
       })
     }
     else{
-      const targetPosition = Cartesian3.fromDegrees(lon, lat , 5000);
+      const targetPosition = Cartesian3.fromDegrees(lon, lat , 15000);
       viewer.camera.flyTo({
         destination:targetPosition,
       })
@@ -58,6 +58,8 @@ export default function Home(){
       )
     }
   }
+
+
   
   async function InitializeMap(){
         

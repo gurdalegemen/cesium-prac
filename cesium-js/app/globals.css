@@ -199,3 +199,8 @@ body {
 #iconMarginPattern{
   margin: 0;
 }
+
+.ui.search>.results {
+  overflow-y: auto;
+  max-height: 550px;
+  }

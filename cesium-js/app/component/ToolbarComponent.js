@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Icon } from "semantic-ui-react";
+import { Button, ButtonGroup, Icon, Dropdown } from "semantic-ui-react";
 
 
 export default function ToolbarComponent(){
