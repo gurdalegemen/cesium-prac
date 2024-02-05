@@ -1,7 +1,50 @@
+import { SceneMode, ImageryLayer, OpenStreetMapImageryProvider, BingMapsImageryProvider, BingMapsStyle } from "cesium";
+import { useState } from "react";
 import { Button, ButtonGroup, Icon, Dropdown } from "semantic-ui-react";
 
 
-export default function ToolbarComponent(){
+export default function ToolbarComponent(view){
+    const [selectedMode, setSelectedMode] = useState('3D');
+
+    const handleModeChange = async (event, { value }) => {
+      setSelectedMode(value);
+      if(value === "Satelite"){
+        view.viewer.scene.mode = SceneMode.SCENE3D;
+      }
+
+      if(value === "Roadmap"){
+        const bingLabelMap = await BingMapsImageryProvider.fromUrl("http://dev.virtualearth.net",{
+            key: process.env.NEXT_PUBLIC_BING_MAPS_API_KEY, // Replace with your Bing Maps API key
+            mapStyle: BingMapsStyle.ROAD,
+        })
+        console.log(bingLabelMap)
+        // view.viewer.scene.imageryLayers.add(bingLabelMap);
+        // const imageryLayer = new ImageryLayer(new OpenStreetMapImageryProvider({
+        //        url: "https://tile.openstreetmap.org/"
+        //      }));
+        // view.viewer.scene.imageryLayers.add(imageryLayer);
+      }
+
+      if(value === "Hybrid"){
+
+        const bingLabelMap = new ImageryLayer(await BingMapsImageryProvider.fromUrl({
+                url: 'https://dev.virtualearth.net',
+                key: process.env.NEXT_PUBLIC_BING_MAPS_API_KEY, // Replace with your Bing Maps API key
+                mapStyle: BingMapsStyle.AERIAL_WITH_LABELS,
+            }))
+        
+        view.viewer.scene.imageryLayers.add(bingLabelMap);
+          
+      }
+      // You can add additional logic here based on the selected mode
+    };
+  
+    const options = [
+      { key: 'Satelite', text: 'Satelite', value: 'Satelite' },
+      { key: 'Roadmap', text: 'Roadmap', value: 'Roadmap' },
+      { key: 'Hybrid', text: 'Hybrid', value: 'Hybrid' },
+    ];
+
     return(
         <>
  
@@ -19,9 +62,20 @@ export default function ToolbarComponent(){
                         <Button id="toolbarButtons">
                             <Icon name="bus" size="large" color="black"/>
                         </Button>
-                        <Button id="toolbarButtons">
+                        <Dropdown
+                          id="toolbarButtons"
+                          button
+                          className='icon'
+                          floating
+                        //   labeled
+                          icon={<Icon name="clone outline" size="large" color="black"/>}
+                          options={options}
+                          onChange={handleModeChange}
+                          value={selectedMode}
+                        />
+                        {/* <Button id="toolbarButtons">
                             <Icon name="clone outline" size="large" color="black"/>
-                        </Button>
+                        </Button> */}
                     </ButtonGroup>
                 </div>
                 <div style={{display:'flex',borderRadius:'12px', backgroundColor:'white', marginLeft:'12px', height:'40px', width:'80px', alignItems:'center',justifyContent:'center', border:'none'}}>

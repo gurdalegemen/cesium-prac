@@ -11,7 +11,7 @@ export default function SearchBarComponent(view){
         };
 
         const flyToSelectedItem = (result) => {
-            const targetPosition = Cartesian3.fromDegrees(parseFloat(result.longitute), parseFloat( result.latitude), 1000);
+            const targetPosition = Cartesian3.fromDegrees(parseFloat(result.longitude), parseFloat( result.latitude), 1000);
             view.viewer.camera.flyTo({
               destination:targetPosition,
             })
@@ -36,14 +36,14 @@ export default function SearchBarComponent(view){
                 name: title, 
                 display_name: description,
                 lat: latitude,
-                lon: longitute,
+                lon: longitude,
 
             }) => ({
             id,
             title,
             description,
             latitude,
-            longitute
+            longitude
         }));
 
     return(
@@ -51,7 +51,9 @@ export default function SearchBarComponent(view){
         <div style={{display:'flex', alignItems:'center', padding:'2px'}}>
             <div style={{display:'flex', width:'358px'}}>
                 <Icon id="searchMarker" name="map marker alternate" color="red" size="large"/>
+                {columns !== undefined &&
                 <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={columns} onResultSelect={(e, data) => flyToSelectedItem(data.result)} placeholder="Mekan ve adres arama" size="large"/>
+                }
                 <ButtonGroup id="searchCustomBtnGroup" basic>
                     <Button id="searchInputButton" onClick={searchLocations} >
                         <Icon id="iconMarginPattern" name="search" size="large"/>

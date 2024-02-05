@@ -37,8 +37,7 @@ export default function ClickPage(){
     window.CESIUM_BASE_URL = '/Cesium/';
     
     //Cesium ion access token.
-    Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMGJjN2U5Yi01NzllLTQwMTYtYTgwNC1mZjY3Y2Q1NGFjZTciLCJpZCI6MTg5OTg0LCJpYXQiOjE3MDUzOTI2NTR9.l9nLnpdewGt1VCY8-cQqUK1ehh_ZLOwlMQNnAcDAm9E";
-    
+    Ion.defaultAccessToken = process.env.NEXT_PUBLIC_ION_MAP_API_KEY;
     // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
     const viewer = new Viewer('cesiumContainer');
     

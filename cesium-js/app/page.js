@@ -70,7 +70,7 @@ export default function Home(){
     window.CESIUM_BASE_URL = '/Cesium/';
     
     //Cesium ion access token.
-    Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyMGJjN2U5Yi01NzllLTQwMTYtYTgwNC1mZjY3Y2Q1NGFjZTciLCJpZCI6MTg5OTg0LCJpYXQiOjE3MDUzOTI2NTR9.l9nLnpdewGt1VCY8-cQqUK1ehh_ZLOwlMQNnAcDAm9E";
+    Ion.defaultAccessToken = process.env.NEXT_PUBLIC_ION_MAP_API_KEY;
     
     
     // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
@@ -113,7 +113,7 @@ export default function Home(){
           <SearchBar viewer={viewer}/>
         </div>
         <div style={{position:'absolute',zIndex:99, display:'flex', top:0, bottom:0, right:0, alignItems:'flex-start', justifyContent:'flex-end', paddingRight:'12px !important', paddingTop:'12px !important', paddingLeft:'48px !important'}}>
-          <Toolbar/>
+          <Toolbar viewer={viewer}/>
         </div>
       </div>
       <div style={{position:'absolute', zIndex:99, display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center', right:'8px', top:'64px', bottom:'64px',}}>
