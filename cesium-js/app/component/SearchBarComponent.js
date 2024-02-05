@@ -1,13 +1,21 @@
 import { useState } from "react";
-import {Search, Button, ButtonGroup, Icon} from "semantic-ui-react"
+import {Search, Button, ButtonGroup, Icon} from "semantic-ui-react";
+import { Cartesian3 } from "cesium";
 
-export default function SearchBarComponent(){
+export default function SearchBarComponent(view){
 
         const [locations, setLocations] = useState([{}]);
 
         const handleInputChange = (event) =>{
             searchLocations(event.target.value);
         };
+
+        const flyToSelectedItem = (result) => {
+            const targetPosition = Cartesian3.fromDegrees(parseFloat(result.longitute), parseFloat( result.latitude), 1000);
+            view.viewer.camera.flyTo({
+              destination:targetPosition,
+            })
+        }
 
         const searchLocations = async (query) =>{
 
@@ -23,16 +31,27 @@ export default function SearchBarComponent(){
         };
 
        
-        const columns = locations.map(({ name: title, display_name: description }) => ({
+        const columns = locations.map(({
+                place_id: id,
+                name: title, 
+                display_name: description,
+                lat: latitude,
+                lon: longitute,
+
+            }) => ({
+            id,
             title,
             description,
-          }));
+            latitude,
+            longitute
+        }));
+
     return(
         <>
         <div style={{display:'flex', alignItems:'center', padding:'2px'}}>
             <div style={{display:'flex', width:'358px'}}>
                 <Icon id="searchMarker" name="map marker alternate" color="red" size="large"/>
-                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={columns} showNoResults={false} placeholder="Mekan ve adres arama" size="large"/>
+                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={columns} onResultSelect={(e, data) => flyToSelectedItem(data.result)} placeholder="Mekan ve adres arama" size="large"/>
                 <ButtonGroup id="searchCustomBtnGroup" basic>
                     <Button id="searchInputButton" onClick={searchLocations} >
                         <Icon id="iconMarginPattern" name="search" size="large"/>
