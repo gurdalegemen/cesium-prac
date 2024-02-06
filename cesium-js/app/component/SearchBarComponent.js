@@ -20,10 +20,11 @@ export default function SearchBarComponent(view){
         const searchLocations = async (query) =>{
 
             try {
-
-                fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
-                .then(response => response.json())
-                .then(json => setLocations(json))
+                if(query !== ""){
+                    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
+                    .then(response => response.json())
+                    .then(json => setLocations(json))
+                }
             
             } catch (error) {
                 console.error(error.message, error)

@@ -9,7 +9,11 @@ export default function ToolbarComponent(view){
     const handleModeChange = async (event, { value }) => {
       setSelectedMode(value);
       if(value === "Satelite"){
-        view.viewer.scene.mode = SceneMode.SCENE3D;
+        const bingLabelMap = await BingMapsImageryProvider.fromUrl("http://dev.virtualearth.net",{
+            key: process.env.NEXT_PUBLIC_BING_MAPS_API_KEY, // Replace with your Bing Maps API key
+            mapStyle: BingMapsStyle.AERIAL,
+        })
+        view.viewer.scene.imageryLayers.addImageryProvider(bingLabelMap);
       }
 
       if(value === "Roadmap"){
@@ -17,23 +21,16 @@ export default function ToolbarComponent(view){
             key: process.env.NEXT_PUBLIC_BING_MAPS_API_KEY, // Replace with your Bing Maps API key
             mapStyle: BingMapsStyle.ROAD,
         })
-        console.log(bingLabelMap)
-        // view.viewer.scene.imageryLayers.add(bingLabelMap);
-        // const imageryLayer = new ImageryLayer(new OpenStreetMapImageryProvider({
-        //        url: "https://tile.openstreetmap.org/"
-        //      }));
-        // view.viewer.scene.imageryLayers.add(imageryLayer);
+        view.viewer.scene.imageryLayers.addImageryProvider(bingLabelMap);
       }
 
       if(value === "Hybrid"){
 
-        const bingLabelMap = new ImageryLayer(await BingMapsImageryProvider.fromUrl({
-                url: 'https://dev.virtualearth.net',
-                key: process.env.NEXT_PUBLIC_BING_MAPS_API_KEY, // Replace with your Bing Maps API key
-                mapStyle: BingMapsStyle.AERIAL_WITH_LABELS,
-            }))
-        
-        view.viewer.scene.imageryLayers.add(bingLabelMap);
+        const bingLabelMap = await BingMapsImageryProvider.fromUrl("http://dev.virtualearth.net",{
+            key: process.env.NEXT_PUBLIC_BING_MAPS_API_KEY, // Replace with your Bing Maps API key
+            mapStyle: BingMapsStyle.AERIAL_WITH_LABELS,
+        })
+        view.viewer.scene.imageryLayers.addImageryProvider(bingLabelMap);
           
       }
       // You can add additional logic here based on the selected mode
