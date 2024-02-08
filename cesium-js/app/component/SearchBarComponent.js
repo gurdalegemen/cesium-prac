@@ -40,11 +40,11 @@ export default function SearchBarComponent(view){
                 lon: longitude,
 
             }) => ({
-            id,
-            title,
-            description,
-            latitude,
-            longitude
+                    key: id,
+                    title,
+                    description,
+                    latitude,
+                    longitude
         }));
 
     return(
@@ -52,9 +52,15 @@ export default function SearchBarComponent(view){
         <div style={{display:'flex', alignItems:'center', padding:'2px'}}>
             <div style={{display:'flex', width:'358px'}}>
                 <Icon id="searchMarker" name="map marker alternate" color="red" size="large"/>
-                {columns !== undefined &&
-                <Search id="searchInput" icon={null} onSearchChange={handleInputChange} results={columns} onResultSelect={(e, data) => flyToSelectedItem(data.result)} placeholder="Mekan ve adres arama" size="large"/>
-                }
+                {/* {columns !== undefined && */}
+                <Search key={columns.id} id="searchInput" icon={null} 
+                    onSearchChange={handleInputChange} 
+                    loading 
+                    results={columns} 
+                    onResultSelect={(e, data) => flyToSelectedItem(data.result)} 
+                    placeholder="Mekan ve adres arama" 
+                    size="large"/>
+                {/* } */}
                 <ButtonGroup id="searchCustomBtnGroup" basic>
                     <Button id="searchInputButton" onClick={searchLocations} >
                         <Icon id="iconMarginPattern" name="search" size="large"/>

@@ -111,7 +111,7 @@ export default function Home(){
     <>
       <div style={{position:'absolute', zIndex:99, paddingTop:'8px', paddingLeft:'16px', width:'100%'}}>
         <div>
-          {/* <SearchBar viewer={viewer}/> */}
+          <SearchBar viewer={viewer}/>
         </div>
         <div style={{position:'absolute',zIndex:99, display:'flex', top:0, bottom:0, right:0, alignItems:'flex-start', justifyContent:'flex-end', paddingRight:'12px !important', paddingTop:'12px !important', paddingLeft:'48px !important'}}>
           <Toolbar viewer={viewer}/>
