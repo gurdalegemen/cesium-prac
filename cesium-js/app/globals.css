@@ -28,6 +28,77 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.mapControlSectionMain{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.mapControlSectionOne{
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  height: 80px;
+  width: 40px;
+}
+
+.mapControlSectionTwo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 12px;
+  height: 40px;
+  width: 40px;
+}
+.mapControlSectionThree{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: grey;
+  border-radius: 12px;
+  height: 40px;
+  width: 40px;
+}
+
+
+
+/* Toolbar Component csses */
+.toolbarSectionOneButtons{
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  background-color: white;
+  height: 40px;
+  width: 200px;
+}
+
+.toolbarSectionTwoButtons{
+  display: flex;
+  border-radius: 12px;
+  background-color: white;
+  margin-left: 12px;
+  height: 40px;
+  width: 80px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.toolbarSectionThreeButtons{
+  display: flex;
+  border-radius: 12px;
+  background-color: white;
+  margin-left: 12px;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+}
+/* Toolbar Component csses */
+
 #customButton{
   border-radius: 0.75rem !important;
   border: none !important;

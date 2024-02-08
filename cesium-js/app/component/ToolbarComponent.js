@@ -48,7 +48,7 @@ export default function ToolbarComponent(view){
     return(
         <>
  
-                <div style={{display:'flex',borderRadius:'12px', backgroundColor:'white', height:'40px', alignItems:'center', height:'40px', width:'200px'}}>
+                <div className="toolbarSectionOneButtons">
                     <ButtonGroup basic id="toolbarButtonGroup">
                         <Button id="toolbarButtons">
                             <Icon name="road" size="large" color="black"/>
@@ -75,7 +75,7 @@ export default function ToolbarComponent(view){
                         />
                     </ButtonGroup>
                 </div>
-                <div style={{display:'flex',borderRadius:'12px', backgroundColor:'white', marginLeft:'12px', height:'40px', width:'80px', alignItems:'center',justifyContent:'center', border:'none'}}>
+                <div className="toolbarSectionTwoButtons">
                     <ButtonGroup basic id="toolbarButtonGroup">
                         <Button id="toolbarButtons">
                             <Icon name="edit outline" size="large" color="black"/>
@@ -85,7 +85,7 @@ export default function ToolbarComponent(view){
                         </Button>
                     </ButtonGroup>
                 </div>
-                <div style={{display:'flex',borderRadius:'12px', backgroundColor:'white', marginLeft:'12px', height:'40px', width:'40px', alignItems:'center'}}>
+                <div className="toolbarSectionThreeButtons">
                         <ButtonGroup basic id="toolbarButtonGroup">
                             <Button id="toolbarButtons">
                                 <Icon name="bars" size="large" color="black"/>     
