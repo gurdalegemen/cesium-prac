@@ -1,4 +1,5 @@
 import { ButtonGroup,Button, Icon } from "semantic-ui-react";
+import { Cartesian3 } from "cesium";
 
 export default function MapControlComponent(mapViewer){
 
@@ -9,7 +10,55 @@ export default function MapControlComponent(mapViewer){
         
         mapViewer.mapViewer.camera.zoomOut(500000);
     }
+    
 
+    function findLocation(lon, lat, viewer, isCity){
+        if(isCity){
+          const targetPosition = Cartesian3.fromDegrees(lon, lat , 1000);
+          viewer.camera.flyTo({
+            destination:targetPosition,
+          })
+        }
+        else{
+          const targetPosition = Cartesian3.fromDegrees(lon, lat , 15000);
+          viewer.camera.flyTo({
+            destination:targetPosition,
+          })
+        }
+       
+      }
+    
+      function userLocationFlyTo(viewer){
+    
+        if('geolocation' in navigator){
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const userPos = position.coords;
+    
+              findLocation(userPos.longitude, userPos.latitude, viewer, true)
+             
+            },
+            (error) => {
+              if(error.code === 1){
+                try {
+                  fetch("https://ipapi.co/json/")
+                  .then(response => response.json())
+                  .then(json => findLocation(json.longitude, json.latitude, viewer, false))
+                  
+                } catch (error) {
+                  throw new Error(error.message)
+                }
+              }
+            }
+          )
+        }
+      }
+
+      const handleLocationClick = () => {
+        userLocationFlyTo(mapViewer.mapViewer)
+    }
+
+    
     return(
         <div className="mapControlSectionMain" >
             <div className="mapControlSectionOne">
@@ -20,8 +69,8 @@ export default function MapControlComponent(mapViewer){
             </div>
             <div style={{padding:'4px', marginTop:'8px'}}>
                 <div className="mapControlSectionTwo">
-                    <Button id="locationCustomButton">
-                        <Icon name="location arrow" size="large" color="grey"/>
+                    <Button id="locationCustomButton" onClick={handleLocationClick}>
+                        <Icon name="location arrow" size="large" color="black"/>
                     </Button>
                 </div>
             </div>

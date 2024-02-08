@@ -189,10 +189,12 @@ body {
   padding: 0;
   height: 40px !important;
   width: 40px !important;
+  opacity: 0.8;
 }
 
 #locationCustomButton:hover{
   border-radius: 0.75rem !important;
+  opacity: 1;
 }
 
 #compassIcon{
@@ -294,6 +296,7 @@ body {
   border-radius: 0.75rem !important;
   opacity: 1;
 }
+
 
 .i.icon{
   margin: 0 !important;
