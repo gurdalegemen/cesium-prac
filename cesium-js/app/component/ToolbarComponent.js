@@ -34,8 +34,6 @@ export default function ToolbarComponent(view){
         view.viewer.scene.imageryLayers.addImageryProvider(bingLabelMap);   
           
       }
-      // You can add additional logic here based on the selected mode
-
     
     };
   

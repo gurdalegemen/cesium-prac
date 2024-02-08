@@ -1,14 +1,39 @@
 import { ButtonGroup,Button, Icon } from "semantic-ui-react";
-import { Cartesian3 } from "cesium";
+import { Cartesian3, Ellipsoid } from "cesium";
+import { useState } from "react";
 
 export default function MapControlComponent(mapViewer){
 
+    var currentHeight;
+    const zoomValue = 500000;
+
+    const getCurrentHeight = () => {
+        return Math.abs(Math.round(Ellipsoid.WGS84.cartesianToCartographic(mapViewer.mapViewer.camera.position).height));
+    }
+
     const zoomPlus = () => {
-        mapViewer.mapViewer.camera.zoomIn(500000);
+        currentHeight = getCurrentHeight();
+        var container = document.getElementById("cesiumGlobe");
+        container.addEventListener('wheel', function(event){
+            event.preventDefault();
+            currentHeight = getCurrentHeight();
+        })
+        if((zoomValue - currentHeight) > zoomValue || currentHeight > zoomValue){
+            mapViewer.mapViewer.camera.zoomIn(zoomValue);
+        }
+        else{
+            alert("use scroll to zoom in");
+        }
     }
     const zoomMinus = () => {
-        
-        mapViewer.mapViewer.camera.zoomOut(500000);
+
+        currentHeight = getCurrentHeight();
+        var container = document.getElementById("cesiumGlobe");
+        container.addEventListener('wheel', function(event){
+            event.preventDefault();
+            currentHeight = getCurrentHeight();
+        })
+        mapViewer.mapViewer.camera.zoomOut(zoomValue);
     }
     
 

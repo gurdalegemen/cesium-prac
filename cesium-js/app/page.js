@@ -18,7 +18,6 @@ export default function Home(){
   var [viewer, setViewer] = useState();
 
 
-
   function findLocation(lon, lat, viewer, isCity){
     if(isCity){
       const targetPosition = Cartesian3.fromDegrees(lon, lat , 1000);
@@ -111,7 +110,7 @@ export default function Home(){
     <>
       <div className="screenMainPage">
         <div>
-          <SearchBar viewer={viewer}/>
+          {/* <SearchBar viewer={viewer}/> */}
         </div>
         <div className="screenToolbar">
           <Toolbar viewer={viewer}/>
