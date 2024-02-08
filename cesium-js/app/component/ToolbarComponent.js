@@ -1,6 +1,6 @@
 import { BingMapsImageryProvider, BingMapsStyle } from "cesium";
 import { useState } from "react";
-import { Button, ButtonGroup, Icon, Dropdown, DropdownMenu, DropdownItem } from "semantic-ui-react";
+import { Button, ButtonGroup, Icon, Dropdown } from "semantic-ui-react";
 
 
 export default function ToolbarComponent(view){

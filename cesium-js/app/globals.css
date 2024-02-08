@@ -28,6 +28,66 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.screenMainPage{
+  position: absolute;
+  z-index: 99;
+  padding-top: 8px;
+  padding-left: 16px;
+  width: 100%;
+}
+
+.mapGlobe{
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  width: 100%;
+}
+
+.screenToolbar{
+    position: absolute;
+    z-index: 99;
+    display: flex;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 12px !important;
+    padding-right: 12px !important;
+    padding-left: 48px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .screenToolbar{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    top: calc(100vh - 48px); /* Calculating distance from the bottom */
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.screenMapControl{
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  top: 64px;
+  right: 8px;
+  bottom: 64px;
+}
+
+.screenControlDivider{
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+/* Map Control Component csses*/
 .mapControlSectionMain{
   display: flex;
   flex-direction: column;
@@ -63,8 +123,21 @@ body {
   height: 40px;
   width: 40px;
 }
+/* Map Control Component csses*/
 
+.searchbarBtnNone{
+  /* style={{position:'absolute', top:0, marginTop:'16px', marginLeft:'372px'}} */
+  position: absolute;
+  top: 0;
+  margin-top: 16px;
+  margin-left: 372px;
+}
 
+@media only screen and (max-width: 860px) {
+  .searchbarBtnNone{
+    display: none;
+  }  
+}
 
 /* Toolbar Component csses */
 .toolbarSectionOneButtons{

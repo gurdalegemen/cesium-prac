@@ -109,21 +109,21 @@ export default function Home(){
 
   return(
     <>
-      <div style={{position:'absolute', zIndex:99, paddingTop:'8px', paddingLeft:'16px', width:'100%'}}>
+      <div className="screenMainPage">
         <div>
           <SearchBar viewer={viewer}/>
         </div>
-        <div style={{position:'absolute',zIndex:99, display:'flex', top:0, bottom:0, right:0, alignItems:'flex-start', justifyContent:'flex-end', paddingRight:'12px !important', paddingTop:'12px !important', paddingLeft:'48px !important'}}>
+        <div className="screenToolbar">
           <Toolbar viewer={viewer}/>
         </div>
       </div>
-      <div style={{position:'absolute', zIndex:99, display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'center', right:'8px', top:'64px', bottom:'64px',}}>
-        <div style={{flexGrow:1, flexBasis:0}}/>
+      <div className="screenMapControl">
+        <div className="screenControlDivider"/>
           <MapControl mapViewer={viewer}/>
-        <div style={{flexGrow:1, flexBasis:0}}/>
+        <div className="screenControlDivider"/>
       </div>
       <Link href="/">
-        <div id="cesiumGlobe" style={{height:'100vh', width:'100%', position:'relative', zIndex:1}}></div>
+        <div id="cesiumGlobe" className="mapGlobe"></div>
       </Link>
     </>
   )

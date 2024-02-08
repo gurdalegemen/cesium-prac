@@ -71,7 +71,7 @@ export default function SearchBarComponent(view){
                 </ButtonGroup>
             </div>
         </div>
-        <div style={{position:'absolute', top:0, marginTop:'16px', marginLeft:'372px'}}>
+        <div className="searchbarBtnNone">
             <Button id="searchButton" icon="caret right" type="submit"/>
         </div>
         </>
