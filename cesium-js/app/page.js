@@ -21,13 +21,13 @@ export default function Home(){
   function findLocation(lon, lat, viewer, isCity){
     if(isCity){
       const targetPosition = Cartesian3.fromDegrees(lon, lat , 1000);
-      viewer.camera.flyTo({
+      viewer.camera.setView({
         destination:targetPosition,
       })
     }
     else{
       const targetPosition = Cartesian3.fromDegrees(lon, lat , 15000);
-      viewer.camera.flyTo({
+      viewer.camera.setView({
         destination:targetPosition,
       })
     }
@@ -82,12 +82,13 @@ export default function Home(){
         baseLayerPicker: false,
         infoBox: false,
         navigationHelpButton: false,
-        
         timeline: false,
         geocoder: false,
         animation: false,
     });
 
+    viewer.camera.defaultZoomAmount = 5000;
+    
     userLocationFlyTo(viewer);
 
     

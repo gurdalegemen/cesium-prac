@@ -1,39 +1,26 @@
 import { ButtonGroup,Button, Icon } from "semantic-ui-react";
 import { Cartesian3, Ellipsoid } from "cesium";
-import { useState } from "react";
 
 export default function MapControlComponent(mapViewer){
 
-    var currentHeight;
-    const zoomValue = 500000;
 
     const getCurrentHeight = () => {
         return Math.abs(Math.round(Ellipsoid.WGS84.cartesianToCartographic(mapViewer.mapViewer.camera.position).height));
     }
 
     const zoomPlus = () => {
-        currentHeight = getCurrentHeight();
-        var container = document.getElementById("cesiumGlobe");
-        container.addEventListener('wheel', function(event){
-            event.preventDefault();
-            currentHeight = getCurrentHeight();
-        })
-        if((zoomValue - currentHeight) > zoomValue || currentHeight > zoomValue){
-            mapViewer.mapViewer.camera.zoomIn(zoomValue);
-        }
-        else{
-            alert("use scroll to zoom in");
-        }
+
+      if(getCurrentHeight() > (mapViewer.mapViewer.camera.defaultZoomAmount)){
+        mapViewer.mapViewer.camera.zoomIn();
+      }
+      else{
+        alert("use scroll to zoom in");
+      }
+  
     }
     const zoomMinus = () => {
 
-        currentHeight = getCurrentHeight();
-        var container = document.getElementById("cesiumGlobe");
-        container.addEventListener('wheel', function(event){
-            event.preventDefault();
-            currentHeight = getCurrentHeight();
-        })
-        mapViewer.mapViewer.camera.zoomOut(zoomValue);
+        mapViewer.mapViewer.camera.zoomOut();
     }
     
 
@@ -45,7 +32,7 @@ export default function MapControlComponent(mapViewer){
           })
         }
         else{
-          const targetPosition = Cartesian3.fromDegrees(lon, lat , 15000);
+          const targetPosition = Cartesian3.fromDegrees(lon, lat , 10000);
           viewer.camera.flyTo({
             destination:targetPosition,
           })
