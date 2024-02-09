@@ -388,5 +388,9 @@ body {
   overflow-y: auto;
   max-height: 550px;
   }
+
+.divider.text {
+    display: none !important;
+}
 /* Semantic UI React override csses*/
 
