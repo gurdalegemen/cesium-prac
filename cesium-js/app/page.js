@@ -88,7 +88,7 @@ export default function Home(){
     });
 
     viewer.camera.defaultZoomAmount = 5000;
-    
+
     userLocationFlyTo(viewer);
 
     
@@ -111,7 +111,7 @@ export default function Home(){
     <>
       <div className="screenMainPage">
         <div>
-          {/* <SearchBar viewer={viewer}/> */}
+          <SearchBar viewer={viewer}/>
         </div>
         <div className="screenToolbar">
           <Toolbar viewer={viewer}/>

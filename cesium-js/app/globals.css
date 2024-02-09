@@ -27,7 +27,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-
+/* Screen */
 .screenMainPage{
   position: absolute;
   z-index: 99;
@@ -42,7 +42,22 @@ body {
   height: 100vh;
   width: 100%;
 }
+/* Screen */
 
+/* Search Bar Component */
+.searchbarContainer{
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}
+
+.searchInput{
+  display: flex;
+  width: 358px;
+}
+/* Search Bar Component */
+
+/* Toolbar Component */
 .screenToolbar{
     position: absolute;
     z-index: 99;
@@ -79,7 +94,9 @@ body {
     display: none !important;
   }
 }
+/* Toolbar Component */
 
+/* Screen Toolbar component*/
 .screenMapControl{
   position: absolute;
   z-index: 99;
@@ -96,6 +113,8 @@ body {
   flex-grow: 1;
   flex-basis: 0;
 }
+/* Screen Toolbar component*/
+
 
 /* Map Control Component csses*/
 .mapControlSectionMain{
@@ -114,6 +133,10 @@ body {
   width: 40px;
 }
 
+.mapControlSectionTwoContainer{
+  padding: 4px;
+  margin-top: 8px;
+}
 .mapControlSectionTwo{
   display: flex;
   align-items: center;
@@ -122,6 +145,10 @@ body {
   border-radius: 12px;
   height: 40px;
   width: 40px;
+}
+
+.mapControlSectionThreeContainer{
+  margin-top: 8px;
 }
 .mapControlSectionThree{
   display: flex;
@@ -136,7 +163,6 @@ body {
 /* Map Control Component csses*/
 
 .searchbarBtnNone{
-  /* style={{position:'absolute', top:0, marginTop:'16px', marginLeft:'372px'}} */
   position: absolute;
   top: 0;
   margin-top: 16px;
@@ -182,6 +208,7 @@ body {
 }
 /* Toolbar Component csses */
 
+/* Semantic UI React override csses*/
 #customButton{
   border-radius: 0.75rem !important;
   border: none !important;
@@ -361,3 +388,5 @@ body {
   overflow-y: auto;
   max-height: 550px;
   }
+/* Semantic UI React override csses*/
+

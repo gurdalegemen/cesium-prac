@@ -1,10 +1,16 @@
 import { useState } from "react";
-import {Search, Button, ButtonGroup, Icon} from "semantic-ui-react";
+import {Search, Button, ButtonGroup, Icon, SearchResults} from "semantic-ui-react";
 import { Cartesian3 } from "cesium";
 
 export default function SearchBarComponent(view){
 
-        const [locations, setLocations] = useState([{}]);
+        const [locations, setLocations] = useState([{
+            place_id: "",
+            name: "", 
+            display_name: "",
+            lat: "",
+            lon: "",
+        }]);
 
         const handleInputChange = (event) =>{
             searchLocations(event.target.value);
@@ -12,13 +18,12 @@ export default function SearchBarComponent(view){
 
         const flyToSelectedItem = (result) => {
             const targetPosition = Cartesian3.fromDegrees(parseFloat(result.longitude), parseFloat( result.latitude), 1000);
-            view.viewer.camera.flyTo({
+            view.viewer.camera.setView({
               destination:targetPosition,
             })
         }
 
         const searchLocations = async (query) =>{
-
             try {
                 if(query !== ""){
                     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${query}`)
@@ -49,13 +54,13 @@ export default function SearchBarComponent(view){
 
     return(
         <>
-        <div style={{display:'flex', alignItems:'center', padding:'2px'}}>
-            <div style={{display:'flex', width:'358px'}}>
+        <div className="searchbarContainer" >
+            <div className="searchInput" >
                 <Icon id="searchMarker" name="map marker alternate" color="red" size="large"/>
-                <Search key={columns.id} id="searchInput" icon={null} 
+                <Search id="searchInput" icon={null}
+                    results={columns}
                     onSearchChange={handleInputChange} 
                     loading 
-                    results={columns} 
                     onResultSelect={(e, data) => flyToSelectedItem(data.result)} 
                     placeholder="Mekan ve adres arama" 
                     size="large"/>

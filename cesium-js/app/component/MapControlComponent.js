@@ -79,14 +79,14 @@ export default function MapControlComponent(mapViewer){
                     <Button id="customButton" onClick={zoomMinus} icon="minus"/>
                 </ButtonGroup>
             </div>
-            <div style={{padding:'4px', marginTop:'8px'}}>
+            <div className="mapControlSectionTwoContainer">
                 <div className="mapControlSectionTwo">
                     <Button id="locationCustomButton" onClick={handleLocationClick}>
                         <Icon name="location arrow" size="large" color="black"/>
                     </Button>
                 </div>
             </div>
-            <div style={{marginTop:'8px'}}>
+            <div className="mapControlSectionTwoContainer">
                 <div className="mapControlSectionThree">
                     <Button id="compassCustomButton">
                         <Icon name="compass" size="big" color="grey"/>
